@@ -45,6 +45,44 @@ function App() {
     }
   }
   
+  // useEffect(()=>{
+  //   async function switchNetwork() {
+  //     if (provider && window.ethereum) {
+  //       try {
+  //         await window.ethereum.request({
+  //           method: 'wallet_switchEthereumChain',
+  //           params: [{ chainId: "0x"+(chainConfig[fromNw].chainId).toString(16) }],
+  //         });
+  //       } catch (error) {
+  //         // If chain ID is unrecognized, add the chain using wallet_addEthereumChain
+  //         if (error.code === 4902) {
+  //           try {
+  //             await window.ethereum.request({
+  //               method: 'wallet_addEthereumChain',
+  //               params: [{
+  //                 chainId: "0x"+chainConfig[fromNw].chainId.toString(16),
+  //                 chainName: chainConfig[fromNw].chainName,
+  //                 nativeCurrency: {
+  //                   name: chainConfig[fromNw].nativeCurrency.name,
+  //                   symbol: chainConfig[fromNw].nativeCurrency.symbol,
+  //                   decimals: chainConfig[fromNw].nativeCurrency.decimals,
+  //                 },
+  //                 rpcUrls: [chainConfig[fromNw].rpc]
+  //               }],
+  //             });
+  //             // Retry switching network after adding it
+  //             await switchNetwork();
+  //           } catch (addChainError) {
+  //             console.error('Error adding chain:', addChainError);
+  //           }
+  //         } else {
+  //           console.error('Error switching network:', error);
+  //         }
+  //       }
+  //     }
+  //   }    
+  //   switchNetwork();
+  // },[fromNw])
 
   const getBalanceOnSelectedNetwork = async()=>{
     try {

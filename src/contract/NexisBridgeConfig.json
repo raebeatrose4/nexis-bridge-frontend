@@ -7,6 +7,12 @@
     "fantom-testnet":{
         "address":"0x8C9Cc380a7bD4cb4b6De6bA85D20299730164d49",
         "chainId":4002,
-        "rpc":"https://rpc.testnet.fantom.network"
+        "rpc":"https://rpc.testnet.fantom.network",
+        "chainName":"Fantom Testnet",
+        "nativeCurrency":{
+            "name":"Fantom",
+            "symbol":"FTM",
+            "decimals":18
+        }
     }
 }
