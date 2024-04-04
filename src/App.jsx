@@ -45,44 +45,44 @@ function App() {
     }
   }
   
-  // useEffect(()=>{
-  //   async function switchNetwork() {
-  //     if (provider && window.ethereum) {
-  //       try {
-  //         await window.ethereum.request({
-  //           method: 'wallet_switchEthereumChain',
-  //           params: [{ chainId: "0x"+(chainConfig[fromNw].chainId).toString(16) }],
-  //         });
-  //       } catch (error) {
-  //         // If chain ID is unrecognized, add the chain using wallet_addEthereumChain
-  //         if (error.code === 4902) {
-  //           try {
-  //             await window.ethereum.request({
-  //               method: 'wallet_addEthereumChain',
-  //               params: [{
-  //                 chainId: "0x"+chainConfig[fromNw].chainId.toString(16),
-  //                 chainName: chainConfig[fromNw].chainName,
-  //                 nativeCurrency: {
-  //                   name: chainConfig[fromNw].nativeCurrency.name,
-  //                   symbol: chainConfig[fromNw].nativeCurrency.symbol,
-  //                   decimals: chainConfig[fromNw].nativeCurrency.decimals,
-  //                 },
-  //                 rpcUrls: [chainConfig[fromNw].rpc]
-  //               }],
-  //             });
-  //             // Retry switching network after adding it
-  //             await switchNetwork();
-  //           } catch (addChainError) {
-  //             console.error('Error adding chain:', addChainError);
-  //           }
-  //         } else {
-  //           console.error('Error switching network:', error);
-  //         }
-  //       }
-  //     }
-  //   }    
-  //   switchNetwork();
-  // },[fromNw])
+    async function changeNetwork(fromNetwork) {
+      if (provider && window.ethereum) {
+        try {
+          console.log(fromNetwork)
+          await window.ethereum.request({
+            method: 'wallet_switchEthereumChain',
+            params: [{ chainId: "0x"+(chainConfig[fromNetwork].chainId).toString(16) }],
+          });
+          await connectToMetaMask();
+        } catch (error) {
+          if (error.code === 4902) {
+            try {
+              await window.ethereum.request({
+                method: 'wallet_addEthereumChain',
+                params: [{
+                  chainId: "0x"+chainConfig[fromNetwork].chainId.toString(16),
+                  chainName: chainConfig[fromNetwork].chainName,
+                  nativeCurrency: {
+                    name: chainConfig[fromNetwork].nativeCurrency.name,
+                    symbol: chainConfig[fromNetwork].nativeCurrency.symbol,
+                    decimals: chainConfig[fromNetwork].nativeCurrency.decimals,
+                  },
+                  rpcUrls: [chainConfig[fromNetwork].rpc]
+                }],
+              });
+              // Retry switching network after adding it
+              await switchNetwork();
+            } catch (addChainError) {
+              console.error('Error adding chain:', addChainError);
+            }
+          } else {
+            console.error('Error switching network:', error);
+          }
+        }
+      }
+      setFromNw(fromNetwork);
+      getBalanceOnSelectedNetwork();
+    }    
 
   const getBalanceOnSelectedNetwork = async()=>{
     try {
@@ -90,7 +90,6 @@ function App() {
         const balFrom = await nexisBridge.balanceOf(connectedWallet);
         const balanceFromInEther = ethers.utils.formatUnits(balFrom.toString(), 'ether');
         setUserFromBalance(balanceFromInEther)
-     
       }
     } catch (error) {
       console.log(error)
@@ -159,7 +158,7 @@ function App() {
   height: '10vh'
 }}>
 <Input bgColor={'white'} maxW={'md'} my={'12'} flex={6} py={2} type='number' value={inputAmount} onChange={(e)=>setInputAmount(e.target.value)} />
-<Select placeholder='Select option' bgColor={'white'} flex={1} onChange={(e)=>setFromNw(e.target.value)} value={fromNw}>
+<Select placeholder='Select option' bgColor={'white'} flex={1} onChange={(e)=>changeNetwork(e.target.value)} value={fromNw}>
   <option value='nexis-testnet'>Nexis Testnet</option>
   <option value='fantom-testnet'>Fantom Testnet</option>
 </Select>
