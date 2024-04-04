@@ -1,0 +1,61 @@
+.nexis-logo{
+    max-width: 50px;
+    border-radius: 10px;
+    margin: 4px;
+    background-color: black;
+    padding: 8px;
+}
+
+.connect-button {
+    background: linear-gradient(to bottom left, #141414, #171717)!important;
+    border: none;
+    border-radius: 8px;
+    color: white!important;
+    transition: background 0.3s, color 0.3s;
+  }
+  
+  .connect-button:hover {
+    background: linear-gradient(to bottom left, #3d3d3d, #555555)!important;
+  }
+
+  .app-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    position: relative;
+    background-color: rgba(121, 121, 121, 0.212);
+}
+
+.app-container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: #131313;
+    /* filter: blur(10px); */
+    z-index: -1;
+    /* opacity: 90%; */
+}
+
+.glassmorph{
+  background: rgba( 239, 239, 239, 0.35 );
+  box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+  backdrop-filter: blur( 15.5px );
+  -webkit-backdrop-filter: blur( 15.5px );
+  border-radius: 40px;
+  border: 1px solid rgba( 255, 255, 255, 0.18 );
+width: 80vw;
+display: flex;
+align-items: center;
+justify-content: center;
+align-self: center;
+}
+
+
+  .footer {
+    margin-top: auto; 
+  }

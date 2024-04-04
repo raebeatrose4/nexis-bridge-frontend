@@ -1,0 +1,12 @@
+{
+    "nexis-testnet":{
+        "address":"0x478b2E52eab5be2d6511412Fb5E79bE26e901f14",
+        "chainId":2370,
+        "rpc":"https://evm-testnet.nexis.network"
+    },
+    "fantom-testnet":{
+        "address":"0x8C9Cc380a7bD4cb4b6De6bA85D20299730164d49",
+        "chainId":4002,
+        "rpc":"https://rpc.testnet.fantom.network"
+    }
+}
